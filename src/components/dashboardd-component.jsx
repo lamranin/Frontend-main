@@ -9,7 +9,7 @@ import {
   Button,
   useColorMode,
 } from '@chakra-ui/react';
-import { MdHome, MdSettings, MdNoteAdd, MdMenu, MdOutlineNightlight, MdOutlineWbSunny } from 'react-icons/md';
+import { MdHome, MdSettings, MdNoteAdd, MdMenu, MdOutlineNightlight, MdOutlineWbSunny, MdOutline3P, MdFreeBreakfast, MdFoodBank } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Particles, {initParticlesEngine} from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim"; 
@@ -23,7 +23,7 @@ import MixedSearchComponent from './mixed-search';
 import MealPlanGenerator from './meal-planner';
 const SidebarItem = ({ icon, children, ...rest }) => {
   return (
-    <Button leftIcon={icon} justifyContent="start" variant="ghost" w="full" {...rest}>
+    <Button leftIcon={icon} justifyContent="start" variant="ghost" size="lg" w="full" {...rest}>
       {children}
     </Button>
   );
@@ -181,11 +181,11 @@ const DashboardComponent = () => {
             alignSelf="flex-end"
           />
           <Heading size="md">Dashboard</Heading>
-          <SidebarItem icon={<MdHome />} onClick={() => handleNavClick('recipefeed')}>Home</SidebarItem>
-          <SidebarItem icon={<MdSettings />} onClick={() => handleNavClick('updateProfile')}>Profile</SidebarItem>
+          <SidebarItem icon={<MdHome />}  onClick={() => handleNavClick('recipefeed')}>Home</SidebarItem>
+          <SidebarItem icon={<MdOutline3P />} onClick={() => handleNavClick('updateProfile')}>Profile</SidebarItem>
           <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('createRecipe')}>Create Recipe</SidebarItem>
-          <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('MealPlanGenerator')}>My Recipes</SidebarItem>
-          <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('savedRecipes')}>Saved Recipes</SidebarItem>
+          <SidebarItem icon={<MdFoodBank />} onClick={() => handleNavClick('MealPlanGenerator')}>Generate Meal Plan</SidebarItem>
+          <SidebarItem icon={<MdFreeBreakfast />} onClick={() => handleNavClick('savedRecipes')}>Saved Recipes</SidebarItem>
           <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('mixedSearch')}>Search</SidebarItem>
           <Button colorScheme="red" onClick={handleLogout}>Log Out</Button>
         </VStack>
