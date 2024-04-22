@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Box,
   Button,
@@ -16,11 +16,21 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
+import { nutritionLabel } from '../script/helper';
 const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
     const navigate = useNavigate();
     const { colorMode } = useColorMode();
     const bgColor = useColorModeValue('white', 'gray.700');
     const accentColor = useColorModeValue('purple.500', 'purple.200');
+    const [selectedId, setSelectedID] = useState(recipeDetails.id);
+    const [nutValue, setNutValue] = useState('');
+    useEffect(() => {
+        if (selectedId) {
+          nutritionLabel(selectedId)
+            .then(data => setNutValue(data))
+            .catch(error => console.error('Failed to fetch nutrition details:', error));
+        }
+      }, [selectedId]);
 
     if (!isOpen) return null;
 
@@ -56,6 +66,14 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                         <Text fontSize="md" color="gold">Cheap: {recipeDetails.cheap ? 'Yes' : 'No'}</Text>
                         <Text fontSize="md" color="gold">Healthy: {recipeDetails.healthy ? 'Yes' : 'No'}</Text>
                         {/* Add more nutritional information here */}
+                        <Box>
+                            
+                                    {nutValue ? (
+                                <Image src={nutValue} alt="Nutritional Label" boxSize="300px" m={4} />
+                                         ) : (
+                        <Text mt={4}>No nutritional label available.</Text>
+                                                 )}
+                        </Box>
                     </Box>
                     <Box bg={bgColor} shadow="lg" p={6} rounded="lg" borderWidth="1px" borderColor={accentColor}>
                         <Heading size="lg" mb={4}>Summary</Heading>
@@ -85,6 +103,7 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                             </List>
                         </Box>
                     )}
+                    
                     <Button colorScheme="purple" onClick={() => navigate('/write-article', {state:{recipeDetails:recipeDetails}})}>
                         Write Article on Recipe
                     </Button>
