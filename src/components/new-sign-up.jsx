@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -16,12 +16,140 @@ import {
 } from '@chakra-ui/react';
 import RecipeSearchByIngredients from './recip-ing'; // Make sure this component's styling aligns with the landing page.
 import { signIn } from '../script/auth';
+import Particles, {initParticlesEngine} from "@tsparticles/react";
+
+import { loadSlim } from "@tsparticles/slim"; 
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const [init, setInit] = useState(false);
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
+      // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+      // starting from v2 you can add only the features you need reducing the bundle size
+      //await loadAll(engine);
+      //await loadFull(engine);
+      await loadSlim(engine);
+      //await loadBasic(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
+  const particlesLoaded = (container) => {
+    console.log(container);
+  };
+  const options = useMemo(
+    () => ({
+      background: {
+        color: {
+          value: "#800080",
+        },
+        opacity:"30%"
+      },
+      fpsLimit: 120,
+      interactivity: {
+        events: {
+          onClick: {
+            enable: true,
+            mode: "push",
+          },
+          onHover: {
+            enable: true,
+            mode: "repulse",
+          },
+        },
+        modes: {
+          push: {
+            quantity: 4,
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4,
+          },
+        },
+      },
+      particles: {
+        color: {
+          value: "random",
+        },
+        links: {
+          color: "random",
+          distance: 150,
+          enable: false,
+          opacity: 0.5,
+          width: 1,
+        },
+        move: {
+          direction: "none",
+          enable: true,
+          outModes: {
+            default: "bounce",
+          },
+          random: false,
+          speed: 5,
+          straight: false,
+        },
+        number: {
+          density: {
+            enable: true,
+          },
+          value: 60,
+        },
+        opacity: {
+          value: 0.35,
+        },
+        "shape": {
+          "type": [
+            
+            "emoji"
+          ],
+          "options": {
+            "emoji": {
+              "particles": {
+                "size": {
+                  "value": 24
+                }
+              },
+              "value": [
+                "🥐",
+                "🍋",
+                "🥦",
+                "🌰",
+                "🥨",
+                "🥯",
+                "🥞",
+                "🧀",
+                "🍗",
+                "🍕",
+                "🌯",
+                "🥚",
+                "🍫",
+                "🍏",
+                "🍒",
+                "🥑",
+                "🍈",
+                "🧅",
+                "🥩",
+                "🥔",
+                "🥛",
+                "🥯",
+                "🧈",
+                "🥖"
+              ]
+            }
+          }
+        },
+        size: {
+          value: { min: 1, max: 5 },
+        },
+      },
+      detectRetina: true,
+    }),
+    [],
+  );
   const handleLogin = async () => {
     // Assuming signIn is a function that authenticates a user
     try {
@@ -48,6 +176,7 @@ const LoginPage = () => {
       bgGradient="linear(to-br, orange.100, purple.300)"
       w="full"
     >
+       <Particles width="100vw" height="100vh" style={{ position: 'absolute', top: 0, left: 0 }} particlesLoaded={particlesLoaded} options={options} />
       <Container maxW="container.xl" p={4} centerContent>
         <Stack direction={{ base: 'column', md: 'row' }} spacing="10" mt="10" mb="10" align="center" w="full">
           <VStack

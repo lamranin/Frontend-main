@@ -14,13 +14,13 @@ function App() {
     <ChakraProvider>
       <Router>
       <Routes>
-        <Route path="/login" exact element={<SignIn />} />
+        <Route path="/oldlogin" exact element={<SignIn />} />
         <Route path="/signup" exact element={<SignUpComponent />} />
         <Route path="/recipe/create" exact element={<CreateArticle />} />
         <Route path="/dashboard" exact element={<DashboardComponent />} />
-        <Route path="/login2" exact element={<LoginPage/>}/>
+        <Route path="/login" exact element={<LoginPage/>}/>
         <Route path="/blog" exact element={<BlogComponent/>}/>
-        <Route path="/" exact element={<DashboardComponent />} />
+        <Route path="/" exact element={<LoginPage />} />
         <Route path="/write-article" exact element={<ArticleComponent />} />
       </Routes>
     </Router>
