@@ -182,11 +182,12 @@ const DashboardComponent = () => {
           />
           <Heading size="md">Dashboard</Heading>
           <SidebarItem icon={<MdHome />}  onClick={() => handleNavClick('recipefeed')}>Home</SidebarItem>
+          <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('mixedSearch')}>Search</SidebarItem>
           <SidebarItem icon={<MdOutline3P />} onClick={() => handleNavClick('updateProfile')}>Profile</SidebarItem>
           <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('createRecipe')}>Create Recipe</SidebarItem>
           <SidebarItem icon={<MdFoodBank />} onClick={() => handleNavClick('MealPlanGenerator')}>Generate Meal Plan</SidebarItem>
           <SidebarItem icon={<MdFreeBreakfast />} onClick={() => handleNavClick('savedRecipes')}>Saved Recipes</SidebarItem>
-          <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('mixedSearch')}>Search</SidebarItem>
+       
           <Button colorScheme="red" onClick={handleLogout}>Log Out</Button>
         </VStack>
       )}
