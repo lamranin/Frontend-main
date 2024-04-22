@@ -12,7 +12,7 @@ import {
   Flex,
   Image
 } from '@chakra-ui/react';
-
+import DietaryRestrictionsDisplay from './dietary-display.jsx';
 const MealPlanGenerator = () => {
   const [calories, setCalories] = useState('');
   const [mealPlan, setMealPlan] = useState(null);
@@ -58,6 +58,12 @@ const MealPlanGenerator = () => {
             onChange={(e) => setCalories(e.target.value)}
           />
         </FormControl>
+        <FormControl isRequired>
+                    <FormLabel>Dietary Restrictions</FormLabel>
+                    <DietaryRestrictionsDisplay
+                        
+                    />
+                </FormControl>
         <Button colorScheme="blue" onClick={fetchMealPlan}>Generate Meal Plan</Button>
         {mealPlan && (
           <Flex direction="column" mt={4}>

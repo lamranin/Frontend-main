@@ -35,15 +35,15 @@ const DietaryRestrictionsPicker = () => {
       <Heading size="md" mb={4}>Select Your Dietary Restrictions</Heading>
       <CheckboxGroup colorScheme="green" defaultValue={selectedRestrictions} onChange={setSelectedRestrictions}>
         <Stack spacing={[1, 5]} direction={['column', 'column']}>
-          <Checkbox value="glutenFree">Gluten Free</Checkbox>
-          <Checkbox value="ketogenic">Ketogenic</Checkbox>
-          <Checkbox value="vegetarian">Vegetarian</Checkbox>
-          <Checkbox value="vegan">Vegan</Checkbox>
-          <Checkbox value="pescatarian">Pescatarian</Checkbox>
-          <Checkbox value="paleo">Paleo</Checkbox>
-          <Checkbox value="primal">Primal</Checkbox>
-          <Checkbox value="lowFODMAP">Low FODMAP</Checkbox>
-          <Checkbox value="dairyFree">Dairy Free</Checkbox>
+          <Checkbox value="GlutenFree">Gluten Free</Checkbox>
+          <Checkbox value="Ketogenic">Ketogenic</Checkbox>
+          <Checkbox value="Vegetarian">Vegetarian</Checkbox>
+          <Checkbox value="Vegan">Vegan</Checkbox>
+          <Checkbox value="Pescatarian">Pescatarian</Checkbox>
+          <Checkbox value="Paleo">Paleo</Checkbox>
+          <Checkbox value="Primal">Primal</Checkbox>
+          <Checkbox value="LowFODMAP">Low FODMAP</Checkbox>
+          <Checkbox value="DairyFree">Dairy Free</Checkbox>
         </Stack>
       </CheckboxGroup>
       <Button mt={4} colorScheme="blue" onClick={handleSaveRestrictions}>Save Preferences</Button>

@@ -17,6 +17,7 @@ import {
 import { recipeFromIngredients, fetchRecipeById, IngredientSuggestion } from '../script/helper';
 import RecipeArticlePage from './recipe-article';
 import { AutoComplete } from 'primereact/autocomplete';
+import DietaryRestrictionsDisplay from './dietary-display.jsx';
 const RecipeSearchByIngredients = () => {
   const [ingredients, setIngredients] = useState('');
   const [recipes, setRecipes] = useState([]);
@@ -109,7 +110,9 @@ const RecipeSearchByIngredients = () => {
           placeholder="Search for ingredients..."
           onSelect={handleSelectedIngredient}
         />
+        
         <Button colorScheme="blue" onClick={fetchRecipes}>Search Recipes</Button>
+        
         </Flex>
         <Flex wrap="wrap" mt={4}>
         {selectedIngredients.map((ingredient, index) => (
@@ -119,6 +122,7 @@ const RecipeSearchByIngredients = () => {
           </Tag>
         ))}
       </Flex>
+      <DietaryRestrictionsDisplay/>
       <SimpleGrid columns={[1, 2, 3]} spacing={5}>
   {recipes.map((recipe, index) => (
     <Box
