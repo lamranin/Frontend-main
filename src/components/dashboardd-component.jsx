@@ -171,7 +171,7 @@ const DashboardComponent = () => {
     [],
   );
   return (
-    <Flex minHeight="100vh" position="relative">
+    <Flex minHeight="100vh" position="relative" >
       <Particles width="100vw" height="100vh" style={{ position: 'absolute', top: 0, left: 0 }} particlesLoaded={particlesLoaded} options={options} />
       {displaySidebar && (
         <VStack w="250px" h="full" p="5" spacing="2" alignItems="flex-center" bg="gray.400" borderRightWidth="1px">

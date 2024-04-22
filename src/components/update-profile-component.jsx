@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineCamera, AiOutlineUpload } from 'react-icons/ai';
 import { uploadImage, fetchUserProfile, updateProfile } from "../script/helper.js";
-
+import DietaryRestrictionsPicker from './dietary-restrictions.jsx';
 const UpdateProfileComponent = () => {
     const [profile, setProfile] = useState({
         name: '',
@@ -178,7 +178,10 @@ const UpdateProfileComponent = () => {
                                     onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
                                 />
                             </FormControl>
-
+                            <FormControl id="diet" isRequired>
+                                <FormLabel>Dietary Restrictions</FormLabel>
+                               < DietaryRestrictionsPicker/>
+                            </FormControl>
                             <FormControl id="Address" isRequired>
                                 <FormLabel>Address</FormLabel>
                                 <Input
