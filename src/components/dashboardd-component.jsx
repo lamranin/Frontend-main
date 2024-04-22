@@ -21,6 +21,7 @@ import SavedRecipe from './saved-recipe';
 import RecipeFeedComponent from './recipe-feed-component';
 import MixedSearchComponent from './mixed-search';
 import MealPlanGenerator from './meal-planner';
+import ArticleList from './blog-component';
 const SidebarItem = ({ icon, children, ...rest }) => {
   return (
     <Button leftIcon={icon} justifyContent="start" variant="ghost" size="lg" w="full" {...rest}>
@@ -183,6 +184,7 @@ const DashboardComponent = () => {
           <Heading size="md">Dashboard</Heading>
           <SidebarItem icon={<MdHome />}  onClick={() => handleNavClick('recipefeed')}>Home</SidebarItem>
           <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('mixedSearch')}>Search</SidebarItem>
+          <SidebarItem icon={<MdFoodBank />} onClick={() => handleNavClick('blogPost')}>Blog Posts</SidebarItem>
           <SidebarItem icon={<MdOutline3P />} onClick={() => handleNavClick('updateProfile')}>Profile</SidebarItem>
           <SidebarItem icon={<MdNoteAdd />} onClick={() => handleNavClick('createRecipe')}>Create Recipe</SidebarItem>
           <SidebarItem icon={<MdFoodBank />} onClick={() => handleNavClick('MealPlanGenerator')}>Generate Meal Plan</SidebarItem>
@@ -200,11 +202,13 @@ const DashboardComponent = () => {
       />
       <Box flex="1" p="4">
         {currentView === 'recipefeed' && <RecipeFeedComponent />}
+        {currentView === 'mixedSearch' && <MixedSearchComponent />}
+        {currentView === 'blogPost' && <ArticleList />}
         {currentView === 'updateProfile' && <UpdateProfileComponent />}
         {currentView === 'createRecipe' && <CreateRecipe />}
         {currentView === 'MealPlanGenerator' && <MealPlanGenerator />}
         {currentView === 'savedRecipes' && <SavedRecipe />}
-        {currentView === 'mixedSearch' && <MixedSearchComponent />}
+        
       </Box>
     </Flex>
   );

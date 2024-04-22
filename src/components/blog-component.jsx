@@ -82,7 +82,7 @@ function ArticleList() {
           {loading ? <Text>Loading...</Text> : recipes.map(recipe => (
             <RecipeCard recipe={recipe} key={recipe.id} />
           ))}
-          {!loading && recipes.length === 0 && <Text>No recipes found.</Text>}
+          {!loading && recipes.length === 0 && <Text>No articles found.</Text>}
         </SimpleGrid>
       </Flex>
     </Container>
