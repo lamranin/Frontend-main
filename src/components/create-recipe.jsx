@@ -8,7 +8,7 @@ import { createCategoryOrIngredient, createRecipe, getIngredients, getRecipeType
 import { CreatableSelect } from 'chakra-react-select';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
-
+import DietaryRestrictionsDisplay from './dietary-display.jsx';
 const CreateRecipe = () => {
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState(null);
@@ -186,7 +186,13 @@ const CreateRecipe = () => {
                         onCreateOption={handleCreateType}
                     />
                 </FormControl>
-
+                <FormControl isRequired>
+                    <FormLabel>Dietary Restrictions</FormLabel>
+                    <DietaryRestrictionsDisplay
+                        
+                    />
+                </FormControl>
+                
                 <FormControl>
                     <FormLabel>Ingredients</FormLabel>
                     <CreatableSelect
