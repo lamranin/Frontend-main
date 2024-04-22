@@ -66,7 +66,7 @@ const DashboardComponent = () => {
         color: {
           value: "#800080",
         },
-        opacity:"20%"
+        opacity:"30%"
       },
       fpsLimit: 120,
       interactivity: {
@@ -97,7 +97,7 @@ const DashboardComponent = () => {
         links: {
           color: "random",
           distance: 150,
-          enable: true,
+          enable: false,
           opacity: 0.5,
           width: 1,
         },
@@ -108,25 +108,58 @@ const DashboardComponent = () => {
             default: "bounce",
           },
           random: false,
-          speed: 6,
+          speed: 5,
           straight: false,
         },
         number: {
           density: {
             enable: true,
           },
-          value: 80,
+          value: 60,
         },
         opacity: {
-          value: 0.5,
+          value: 0.35,
         },
-        shape: {
-          type: "image",
-          images: [
-            {"src": Burger,
-            "height":20,
-            "width":20
-        }]
+        "shape": {
+          "type": [
+            
+            "emoji"
+          ],
+          "options": {
+            "emoji": {
+              "particles": {
+                "size": {
+                  "value": 24
+                }
+              },
+              "value": [
+                "🥐",
+                "🍋",
+                "🥦",
+                "🌰",
+                "🥨",
+                "🥯",
+                "🥞",
+                "🧀",
+                "🍗",
+                "🍕",
+                "🌯",
+                "🥚",
+                "🍫",
+                "🍏",
+                "🍒",
+                "🥑",
+                "🍈",
+                "🧅",
+                "🥩",
+                "🥔",
+                "🥛",
+                "🥯",
+                "🧈",
+                "🥖"
+              ]
+            }
+          }
         },
         size: {
           value: { min: 1, max: 5 },
