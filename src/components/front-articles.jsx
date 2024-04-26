@@ -15,8 +15,9 @@ import {useLocation} from 'react-router-dom';
 const ArticleComponent = () => {
   const [newArticleContent, setNewArticleContent] = useState('');
   const [newArticleTitle, setNewArticleTitle] = useState('');
-  const [selectedRecipeId, setSelectedRecipeId] = useState('');
   const location = useLocation();
+  const [selectedRecipeId, setSelectedRecipeId] = useState(location.state.recipeDetails.id);
+  
   const toast = useToast();
 
   const handleSaveArticle = async () => {
@@ -38,7 +39,7 @@ const ArticleComponent = () => {
         title: newArticleTitle + " - An article on " + location.state.recipeDetails.id,
         content: newArticleContent,
         userId: localStorage.getItem('userId'),
-        recipeId: location.state.recipeDetails.id
+        recipeId: location.state.recipeDetails.id + "art"
       };
 
       
