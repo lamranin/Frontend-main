@@ -467,10 +467,10 @@ export async function searchRecipeByParams(params) {
     }
     return response.json();
 };
-/*
-export async function searchRecipeByIngredients(params) {
-    const query = new URLSearchParams(params).toString();
-    const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?${query}`, {
+
+export async function searchIngredients(params) {
+    
+    const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${params}/ingredientWidget.json`, {
         method: 'GET',
         headers: {
             "X-RapidAPI-Key": process.env.REACT_APP_X_RAPID_API_KEY,
@@ -482,7 +482,21 @@ export async function searchRecipeByIngredients(params) {
     }
     return response.json();
 };
-*/
+export async function vizIngredients(params) {
+    
+    const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${params}/ingredientWidget`, {
+        method: 'GET',
+        headers: {
+            "X-RapidAPI-Key": process.env.REACT_APP_X_RAPID_API_KEY,
+            "X-RapidAPI-Host": process.env.REACT_APP_X_RAPID_API_HOST,
+        },
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.text();
+};
+
 export async function ingredientRecipeSearch(params){
     const axios = require('axios');
     const query = new URLSearchParams(params).toString();

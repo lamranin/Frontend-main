@@ -12,11 +12,13 @@ import {
   useColorModeValue,
   useColorMode,
   Flex,
+  HStack,
+  useToast,
   Tooltip
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
-import { nutritionLabel, fetchRecipeNutById } from '../script/helper';
+import { nutritionLabel, fetchRecipeNutById, searchIngredients } from '../script/helper';
 const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
     const navigate = useNavigate();
     const { colorMode } = useColorMode();
@@ -24,16 +26,71 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
     const accentColor = useColorModeValue('purple.500', 'purple.200');
     const [selectedId, setSelectedID] = useState(recipeDetails.id);
     const [nutValue, setNutValue] = useState('');
+    const [ings, setIngs] = useState(searchIngredients(selectedId)
+    .then(data =>setIngs(data))
+    .catch(error => console.error('Failed to fetch ingredient details:', error)));
+    const [measurement, setMeasurement] = useState('metric'); // 'metric' or 'us'
+    const toast = useToast();
+    const toggleMeasurement = () => {
+    setMeasurement(measurement === 'metric' ? 'us' : 'metric');
+    toast({
+      title: `Switched to ${measurement === 'metric' ? 'US' : 'Metric'} measurements`,
+      status: 'info',
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
     useEffect(() => {
         if (selectedId) {
             fetchRecipeNutById(selectedId)
             .then(data => setNutValue(data))
             .catch(error => console.error('Failed to fetch nutrition details:', error));
+            
+            searchIngredients(selectedId)
+            .then(data =>setIngs(data))
+            .catch(error => console.error('Failed to fetch ingredient details:', error));
+            
+
         }
       }, [selectedId]);
 
     if (!isOpen) return null;
-
+    const IngredientComponent = ({ ings }) => {
+        return (
+            <VStack spacing={4} align="stretch">
+              <Button onClick={toggleMeasurement} colorScheme="purple" size="lg">
+                Switch to {measurement === 'metric' ? 'US' : 'Metric'} Measurements
+              </Button>
+              <List spacing={3}>
+                {ings.ingredients?.map((ingredient) => (
+                  <ListItem key={ingredient.name} _hover={{ bg:  'purple.700', transform: 'translateY(-2px)', shadow: 'lg' }}>
+                    <HStack spacing={4}>
+                      <Box position="relative" w="50px" h="50px">
+                        <Image
+                          borderRadius="full"
+                          boxSize="full"
+                          objectFit="cover"
+                          src={`https://img.spoonacular.com/ingredients_500x500/${ingredient.image}`}
+                          alt={ingredient.name}
+                          loading="lazy"
+                        />
+                      </Box>
+                      <Box flex="1" p={2}>
+                        <Text fontWeight="bold">{ingredient.name}</Text>
+                        <Text fontSize="sm" color="gray.500">
+                          {measurement === 'metric'
+                            ? `${ingredient.amount.metric.value} ${ingredient.amount.metric.unit}`
+                            : `${ingredient.amount.us.value} ${ingredient.amount.us.unit}`}
+                        </Text>
+                      </Box>
+                    </HStack>
+                  </ListItem>
+                ))}
+              </List>
+            </VStack>
+          );
+    };
     return (
         <Box position="fixed" inset="0" bg="gray.100" overflowY="auto">
             <Container maxW="container.xl" py="12">
@@ -94,6 +151,8 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                             </List>
                         </Box>
                     )}
+                    <IngredientComponent ings={ings}/>
+                    
                     {recipeDetails.analyzedInstructions?.[0] && (
                         <Box bg={bgColor} shadow="lg" p={6} rounded="lg" borderWidth="1px" borderColor={accentColor}>
                             <Heading size="lg" mb={4}>Instructions</Heading>
