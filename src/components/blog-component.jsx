@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import RecipeCard from './recipe-card';
 import { searchRecipe } from '../script/helper';
-
+import ArticleDisplay from './article-feed';
 function ArticleList() {
   const [recipes, setRecipes] = useState([]);
   const [searchItem, setSearchItem] = useState('');
@@ -84,6 +84,7 @@ function ArticleList() {
           ))}
           {!loading && recipes.length === 0 && <Text>No articles found.</Text>}
         </SimpleGrid>
+        <ArticleDisplay/>
       </Flex>
     </Container>
   );

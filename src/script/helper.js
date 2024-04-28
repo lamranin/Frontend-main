@@ -439,7 +439,20 @@ export async function fetchRecipeNutritionById(id) {
     }
     return response.json();
 };
-
+export async function fetchRecipeNutById(id) {
+    const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/nutritionLabel?defaultCss=true&showOptionalNutrients=true&showZeroValues=true&showIngredients=true`, {
+        method: 'GET',
+        headers: {
+            "X-RapidAPI-Key": process.env.REACT_APP_X_RAPID_API_KEY,
+            "X-RapidAPI-Host": process.env.REACT_APP_X_RAPID_API_HOST,
+        },
+       
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.text();
+};
 export async function searchRecipeByParams(params) {
     const query = new URLSearchParams(params).toString();
     const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?${query}`, {

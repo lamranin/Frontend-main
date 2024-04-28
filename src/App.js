@@ -9,6 +9,7 @@ import ArticleList from "./components/blog-component";
 import {ChakraProvider} from "@chakra-ui/react"
 import BlogComponent from "./components/food-articles";
 import ArticleComponent from "./components/front-articles";
+import ArticleDisplay from "./components/article-feed";
 function App() {
   return (
     <ChakraProvider>
@@ -22,6 +23,7 @@ function App() {
         <Route path="/blog" exact element={<BlogComponent/>}/>
         <Route path="/" exact element={<LoginPage />} />
         <Route path="/write-article" exact element={<ArticleComponent />} />
+        <Route path="/articles" exact element={ <ArticleDisplay/>}/>
       </Routes>
     </Router>
     </ChakraProvider>

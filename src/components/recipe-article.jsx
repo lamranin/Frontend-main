@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
-import { nutritionLabel } from '../script/helper';
+import { nutritionLabel, fetchRecipeNutById } from '../script/helper';
 const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
     const navigate = useNavigate();
     const { colorMode } = useColorMode();
@@ -26,7 +26,7 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
     const [nutValue, setNutValue] = useState('');
     useEffect(() => {
         if (selectedId) {
-          nutritionLabel(selectedId)
+            fetchRecipeNutById(selectedId)
             .then(data => setNutValue(data))
             .catch(error => console.error('Failed to fetch nutrition details:', error));
         }
@@ -66,15 +66,16 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                         <Text fontSize="md" color="gold">Cheap: {recipeDetails.cheap ? 'Yes' : 'No'}</Text>
                         <Text fontSize="md" color="gold">Healthy: {recipeDetails.healthy ? 'Yes' : 'No'}</Text>
                         {/* Add more nutritional information here */}
-                        <Box>
+                        
+                    </Box>
+                    <Box>
                             
                                     {nutValue ? (
-                                <Image src={nutValue} alt="Nutritional Label" boxSize="300px" m={4} />
+                                <div dangerouslySetInnerHTML={ {__html: nutValue}}></div>
                                          ) : (
                         <Text mt={4}>No nutritional label available.</Text>
                                                  )}
                         </Box>
-                    </Box>
                     <Box bg={bgColor} shadow="lg" p={6} rounded="lg" borderWidth="1px" borderColor={accentColor}>
                         <Heading size="lg" mb={4}>Summary</Heading>
                         <Text dangerouslySetInnerHTML={{ __html: recipeDetails.summary }} />

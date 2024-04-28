@@ -10,10 +10,11 @@ import {
   useToast
 } from '@chakra-ui/react';
 import { createArticle } from '../script/helper';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 const ArticleComponent = () => {
   const [newArticleContent, setNewArticleContent] = useState('');
+  const navigate = useNavigate();
   const [newArticleTitle, setNewArticleTitle] = useState('');
   const location = useLocation();
   const [selectedRecipeId, setSelectedRecipeId] = useState(location.state.recipeDetails.id);
@@ -21,7 +22,7 @@ const ArticleComponent = () => {
   const toast = useToast();
 
   const handleSaveArticle = async () => {
-    console.log(location.state.recipeDetails.id);
+    
     setSelectedRecipeId(location.state.recipeDetails.id);
     if (!selectedRecipeId) {
       toast({
@@ -39,7 +40,7 @@ const ArticleComponent = () => {
         title: newArticleTitle + " - An article on " + location.state.recipeDetails.id,
         content: newArticleContent,
         userId: localStorage.getItem('userId'),
-        recipeId: location.state.recipeDetails.id + "art"
+        recipeId: location.state.recipeDetails.id + ""
       };
 
       
@@ -55,6 +56,7 @@ const ArticleComponent = () => {
           });
     
           setNewArticleContent(''); 
+          navigate("/dashboard")
       }
       // Clear the textarea after saving
     } catch (error) {
