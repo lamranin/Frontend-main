@@ -1,4 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
+
+
+
 import {
   Box,
   Button,
@@ -17,8 +20,11 @@ import {
   Tooltip
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-
+import Particles, {initParticlesEngine} from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim"; 
 import { nutritionLabel, fetchRecipeNutById, searchIngredients } from '../script/helper';
+
+import pattern from './Assets/1297918.png';
 const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
     const navigate = useNavigate();
     const { colorMode } = useColorMode();
@@ -26,9 +32,8 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
     const accentColor = useColorModeValue('purple.500', 'purple.200');
     const [selectedId, setSelectedID] = useState(recipeDetails.id);
     const [nutValue, setNutValue] = useState('');
-    const [ings, setIngs] = useState(searchIngredients(selectedId)
-    .then(data =>setIngs(data))
-    .catch(error => console.error('Failed to fetch ingredient details:', error)));
+    const [init, setInit] = useState(false);
+    const [ings, setIngs] = useState([]);
     const [measurement, setMeasurement] = useState('metric'); // 'metric' or 'us'
     const toast = useToast();
     const toggleMeasurement = () => {
@@ -50,11 +55,11 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
             searchIngredients(selectedId)
             .then(data =>setIngs(data))
             .catch(error => console.error('Failed to fetch ingredient details:', error));
-            
 
         }
       }, [selectedId]);
 
+     
     if (!isOpen) return null;
     const IngredientComponent = ({ ings }) => {
         return (
@@ -64,9 +69,9 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
               </Button>
               <List spacing={3}>
                 {ings.ingredients?.map((ingredient) => (
-                  <ListItem key={ingredient.name} _hover={{ bg:  'purple.700', transform: 'translateY(-2px)', shadow: 'lg' }}>
+                  <ListItem rounded="lg" bgColor={"gray.600"} key={ingredient.name}  _hover={{ bg:  'purple.700', transform: 'translateY(-2px)', shadow: 'lg' }}>
                     <HStack spacing={4}>
-                      <Box position="relative" w="50px" h="50px">
+                      <Box position="relative" w="300px" h="300px">
                         <Image
                           borderRadius="full"
                           boxSize="full"
@@ -77,8 +82,8 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                         />
                       </Box>
                       <Box flex="1" p={2}>
-                        <Text fontWeight="bold">{ingredient.name}</Text>
-                        <Text fontSize="sm" color="gray.500">
+                        <Text fontSize="3xl" fontWeight="bold">{ingredient.name}</Text>
+                        <Text fontSize="xl" color="while.500">
                           {measurement === 'metric'
                             ? `${ingredient.amount.metric.value} ${ingredient.amount.metric.unit}`
                             : `${ingredient.amount.us.value} ${ingredient.amount.us.unit}`}
@@ -92,8 +97,10 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
           );
     };
     return (
-        <Box position="fixed" inset="0" bg="gray.100" overflowY="auto">
-            <Container maxW="container.xl" py="12">
+        
+        <Box position="fixed" inset="0" bg="pink.900"  overflowY="auto" bgImage={pattern} bgRepeat="repeat"  bgPosition="center">
+            <Container maxW="container.xl" py="12" >
+           
                 <Flex justifyContent="space-between" alignItems="center">
                     <Heading size="xl" color={accentColor}>Recipe Details</Heading>
                     <Button colorScheme="purple" onClick={onClose}>
@@ -137,20 +144,7 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                         <Heading size="lg" mb={4}>Summary</Heading>
                         <Text dangerouslySetInnerHTML={{ __html: recipeDetails.summary }} />
                     </Box>
-                    {recipeDetails.extendedIngredients && (
-                        <Box bg={bgColor} shadow="lg" p={6} rounded="lg" borderWidth="1px" borderColor={accentColor}>
-                            <Heading size="lg" mb={4}>Ingredients</Heading>
-                            <List spacing="3">
-                                {recipeDetails.extendedIngredients.map((ingredient) => (
-                                    <Tooltip label={ingredient.original} hasArrow bg={accentColor} color="white">
-                                        <ListItem key={ingredient.id} _hover={{ bg: accentColor, color: 'white', borderRadius: 'md', cursor: 'pointer', transition: 'all 0.3s' }}>
-                                            {ingredient.original}
-                                        </ListItem>
-                                    </Tooltip>
-                                ))}
-                            </List>
-                        </Box>
-                    )}
+                   
                     <IngredientComponent ings={ings}/>
                     
                     {recipeDetails.analyzedInstructions?.[0] && (
