@@ -71,7 +71,7 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                 {ings.ingredients?.map((ingredient) => (
                   <ListItem rounded="lg" bgColor={"gray.600"} key={ingredient.name}  _hover={{ bg:  'purple.700', transform: 'translateY(-2px)', shadow: 'lg' }}>
                     <HStack spacing={4}>
-                      <Box position="relative" w="300px" h="300px">
+                      <Box position="relative" w="200px" h="200px">
                         <Image
                           borderRadius="full"
                           boxSize="full"

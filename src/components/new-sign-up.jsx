@@ -19,7 +19,7 @@ import { signIn } from '../script/auth';
 import Particles, {initParticlesEngine} from "@tsparticles/react";
 
 import { loadSlim } from "@tsparticles/slim"; 
-
+import pattern from './Assets/new_pattern.png';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -175,9 +175,11 @@ const LoginPage = () => {
       minHeight="100vh"
       bgGradient="linear(to-br, orange.100, purple.300)"
       w="full"
+      bgImage={pattern} bgRepeat="repeat"  bgPosition="center"
+      
     >
        <Particles width="100vw" height="100vh" style={{ position: 'absolute', top: 0, left: 0 }} particlesLoaded={particlesLoaded} options={options} />
-      <Container maxW="container.xl" p={4} centerContent>
+      <Container maxW="container.xl" p={4} centerContent >
         <Stack direction={{ base: 'column', md: 'row' }} spacing="10" mt="10" mb="10" align="center" w="full">
           <VStack
             spacing={4}
