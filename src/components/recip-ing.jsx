@@ -81,7 +81,7 @@ const RecipeSearchByIngredients = () => {
 
   const suggestionTemplate = (suggestion) => {
     return (
-      <Flex align="center" py={2}>
+      <Flex align="left" py={2}>
         <Image
           src={`https://img.spoonacular.com/ingredients_100x100/${suggestion.image}`}
           alt={suggestion.name}
@@ -90,15 +90,12 @@ const RecipeSearchByIngredients = () => {
           objectFit="cover"
           borderRadius="full"
         />
-        <Text>{suggestion.name}</Text>
+        <Heading as="h3">{suggestion.name}</Heading>
       </Flex>
     );
   };
   return (
     <Container maxW="7xl" py={10}>
-      <VStack spacing={4}>
-        <Heading as="h2" size="xl">Search Recipes by Ingredients</Heading>
-        <Flex>
         <AutoComplete
           value={inputValue}
           suggestions={suggestions}
@@ -109,20 +106,26 @@ const RecipeSearchByIngredients = () => {
           itemTemplate={suggestionTemplate}
           placeholder="Search for ingredients..."
           onSelect={handleSelectedIngredient}
+          position="center"
         />
         
         <Button colorScheme="blue" onClick={fetchRecipes}>Search Recipes</Button>
+      <VStack spacing={4}>
         
-        </Flex>
-        <Flex wrap="wrap" mt={4}>
+        <Heading as="h2" size="xl">Search Recipes by Ingredients</Heading>
+        <Flex py={10}>
+      
+        
         {selectedIngredients.map((ingredient, index) => (
           <Tag size="lg" key={index} borderRadius="full" variant="solid" colorScheme="green" m={1}>
             <TagLabel>{ingredient.name}</TagLabel>
             <TagCloseButton onClick={() => removeIngredient(ingredient)} />
           </Tag>
         ))}
-      </Flex>
+      
       <DietaryRestrictionsDisplay/>
+        </Flex>
+       
       <SimpleGrid columns={[1, 2, 3]} spacing={5}>
   {recipes.map((recipe, index) => (
     <Box

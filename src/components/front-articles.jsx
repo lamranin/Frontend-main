@@ -9,7 +9,7 @@ import {
   Text,
   useToast
 } from '@chakra-ui/react';
-import { createArticle } from '../script/helper';
+import { createArticle, createRecipe} from '../script/helper';
 import {useLocation, useNavigate} from 'react-router-dom';
 
 const ArticleComponent = () => {
@@ -21,8 +21,48 @@ const ArticleComponent = () => {
   
   const toast = useToast();
 
+const handleSaveRecipe = async () => {
+  if (location.state.recipeDetails) {
+    const recipeData = {
+        title: location.state.recipeDetails.title,
+        content: location.state.recipeDetails.instructions,
+        categoryName: "Lunch", // Adjust if you're using a different state structure
+        images: [location.state.recipeDetails.image], // Assuming a single image for simplicity; adjust as needed
+        ingredientRecords: location.state.recipeDetails.extendedIngredients?.map(ingredient => ({
+            name: ingredient.name, // Adjust based on your ingredient selection implementation
+            quantity: ingredient.measures.metric.amount +"",
+            unit: ingredient.measures.metric.unitShort
+        }))
+    };
+
+    try {
+        const createdRecipe = await createRecipe(recipeData);
+        console.log('Recipe created successfully:', createdRecipe);
+        if (createdRecipe) {
+            toast({
+                title: 'Recipe Created',
+                description: 'Your recipe has been successfully created.',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            });
+        }
+
+        // Optionally reset form state or redirect user
+    } catch (error) {
+        toast({
+            title: 'Creation Failed',
+            description: error.message,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+        });
+    }
+}
+}
+
   const handleSaveArticle = async () => {
-    
+    handleSaveRecipe(location.state.recipeDetails.id);
     setSelectedRecipeId(location.state.recipeDetails.id);
     if (!selectedRecipeId) {
       toast({
@@ -36,6 +76,7 @@ const ArticleComponent = () => {
     }
 
     try {
+      
       const articleData = {
         title: newArticleTitle + " - An article on " + location.state.recipeDetails.id,
         content: newArticleContent,
