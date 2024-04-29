@@ -128,6 +128,7 @@ const RecipeFeedComponent = () => {
                     <Button onClick={() => {
                         setSearchItem("");
                         setClearSearch(!clearSearch);
+                        setSelectedIngredient("");
                     }}>Clear Result</Button>
                 </Stack>
 

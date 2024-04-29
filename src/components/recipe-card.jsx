@@ -8,6 +8,7 @@ import {
   Icon,
   IconButton,
   Tooltip,
+  useToast,
   useDisclosure,
 } from '@chakra-ui/react';
 import { FaComment, FaArrowDown } from 'react-icons/fa';
@@ -21,16 +22,42 @@ import {motion, isValidMotionProp} from 'framer-motion';
 
 
 const RecipeCard = ({ recipe }) => {
-    const [commentCount, setCommentCount] = useState(0);
+    
     const [hasSaved, setHasSaved] = useState(false);
-    const [savedByUsersCount, setSavedByUsersCount] = useState(0);
+    
+    const [savedByUsersCount, setSavedByUsersCount] = useState(recipe.savedByUsers.length ?? 0);
+    const [commentCount, setCommentCount] = useState(recipe.comments.length ?? 0);
     const { isOpen: isRecipeModalOpen, onOpen: onRecipeModalOpen, onClose: onRecipeModalClose } = useDisclosure();
     const { isOpen: isCommentModalOpen, onOpen: onCommentModalOpen, onClose: onCommentModalClose } = useDisclosure();
+    useEffect(() => {
+      const userId = localStorage.getItem('userId');
+      console.log('User ID:', recipe.savedByUsers);
+      const isSaved = recipe.savedByUsers.some(user => user.userId === userId);
+      setHasSaved(isSaved);
+  }, [recipe.savedByUsers]);
+  const toast = useToast();
+    const handleSave = async () => {
+      try {
+          const response = await saveRecipe(recipe.id);
+          if (response) {
+              setHasSaved(!hasSaved);
+              setSavedByUsersCount(savedByUsersCount + (hasSaved ? -1 : 1));
+              toast({
+                  title: !hasSaved ? 'Saved Recipe' : 'Removed Recipe',
+                  description: !hasSaved ? 'Recipe Saved successfully.' : 'Recipe Removed successfully',
+                  status: 'success',
+                  duration: 5000,
+                  isClosable: true,
+              });
+             
+          }
+      } catch (error) {
+          console.error("Error saving recipe:", error);
+      }
+      
+  };
+      
   
-    const handleSave = () => {
-      setHasSaved(!hasSaved);
-      setSavedByUsersCount(hasSaved ? savedByUsersCount - 1 : savedByUsersCount + 1);
-    };
   
     return (
       <Box
