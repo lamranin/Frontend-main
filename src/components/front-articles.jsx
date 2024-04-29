@@ -24,14 +24,15 @@ const ArticleComponent = () => {
 const handleSaveRecipe = async () => {
   if (location.state.recipeDetails) {
     const recipeData = {
+        id: location.state.recipeDetails.id+"",
         title: location.state.recipeDetails.title,
         content: location.state.recipeDetails.instructions,
         categoryName: "Lunch", // Adjust if you're using a different state structure
         images: [location.state.recipeDetails.image], // Assuming a single image for simplicity; adjust as needed
-        ingredientRecords: location.state.recipeDetails.extendedIngredients?.map(ingredient => ({
+        ingredientRecords: location.state.Ingredients.ingredients?.map(ingredient => ({
             name: ingredient.name, // Adjust based on your ingredient selection implementation
-            quantity: ingredient.measures.metric.amount +"",
-            unit: ingredient.measures.metric.unitShort
+            quantity: ingredient.amount.metric.value +"",
+            unit: ingredient.amount.metric.unit
         }))
     };
 

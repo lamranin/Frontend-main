@@ -158,7 +158,7 @@ const RecipeArticlePage = ({ recipeDetails, isOpen, onClose }) => {
                         </Box>
                     )}
                     
-                    <Button colorScheme="purple" onClick={() => navigate('/write-article', {state:{recipeDetails:recipeDetails}})}>
+                    <Button colorScheme="purple" onClick={() => navigate('/write-article', {state:{recipeDetails:recipeDetails, Ingredients:ings}})}>
                         Write Article on Recipe
                     </Button>
                 </VStack>
