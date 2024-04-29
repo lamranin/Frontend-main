@@ -71,12 +71,13 @@ const RecipeCard = ({ recipe }) => {
         transition="transform 0.2s ease-in-out"
         _hover={{ transform: 'scale(1.05)', shadow: 'lg' }}
       >
+        <Box>
         {recipe.images && recipe.images.length > 0 && (
-          <Box>
+          
             <Image src={recipe.images[0].imageUrl} alt={`Image of ${recipe.title}`} margin="auto" />
-          </Box>
+         
         )}
-  
+        </Box>
         <Stack>
           {recipe.category && (
             <Badge borderRadius="full" px="2" colorScheme="teal">

@@ -27,8 +27,8 @@ const handleSaveRecipe = async () => {
         id: location.state.recipeDetails.id+"",
         title: location.state.recipeDetails.title,
         content: location.state.recipeDetails.instructions,
-        categoryName: "Lunch", // Adjust if you're using a different state structure
-        images: [location.state.recipeDetails.image], // Assuming a single image for simplicity; adjust as needed
+        categoryName: location.state.recipeDetails.dishTypes[0] || "Lunch", // Adjust if you're using a different state structure
+        images: [ location.state.recipeDetails.image], // Assuming a single image for simplicity; adjust as needed
         ingredientRecords: location.state.Ingredients.ingredients?.map(ingredient => ({
             name: ingredient.name, // Adjust based on your ingredient selection implementation
             quantity: ingredient.amount.metric.value +"",
@@ -79,7 +79,7 @@ const handleSaveRecipe = async () => {
     try {
       
       const articleData = {
-        title: newArticleTitle + " - An article on " + location.state.recipeDetails.id,
+        title: newArticleTitle + " - An article on " + location.state.recipeDetails.title,
         content: newArticleContent,
         userId: localStorage.getItem('userId'),
         recipeId: location.state.recipeDetails.id + ""
@@ -116,6 +116,12 @@ const handleSaveRecipe = async () => {
 
   return (
     <VStack spacing={4} align="stretch">
+      <Heading as="h1" size="xl">What would you like to title your article?</Heading>
+      <Textarea
+        placeholder="Enter a title..."
+        value={newArticleTitle}
+        onChange={e => setNewArticleTitle(e.target.value)}
+      />
       <Heading as="h2" size="lg">Write an Article</Heading>
       <Textarea
         placeholder="Write your article here..."

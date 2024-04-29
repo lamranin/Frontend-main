@@ -13,7 +13,7 @@ import { MdHome, MdSettings, MdNoteAdd, MdMenu, MdOutlineNightlight, MdOutlineWb
 import { useNavigate } from 'react-router-dom';
 import Particles, {initParticlesEngine} from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim"; 
-import CreateRecipeComponent from './create-recipe-component';
+
 import UpdateProfileComponent from './update-profile-component';
 import CreateRecipe from './create-recipe';
 import OwnRecipes from './own-recipies-component';
