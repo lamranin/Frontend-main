@@ -118,7 +118,7 @@ const MealPlanGenerator = () => {
                         
                     />
                 </FormControl>
-        <Button colorScheme="blue" onClick={fetchMealPlan}>Generate Meal Plan</Button>
+        <Button colorScheme="pink" onClick={fetchMealPlan}>Generate Meal Plan</Button>
         
         {mealPlan && (
           <Flex direction="column" mt={4}>

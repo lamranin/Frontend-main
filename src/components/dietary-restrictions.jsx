@@ -35,15 +35,15 @@ const DietaryRestrictionsPicker = () => {
       <Heading size="md" mb={4}>Select Your Dietary Restrictions</Heading>
       <CheckboxGroup colorScheme="green" defaultValue={selectedRestrictions} onChange={setSelectedRestrictions}>
         <Stack spacing={[1, 5]} direction={['column', 'column']}>
-          <Checkbox value="GlutenFree">Gluten Free</Checkbox>
-          <Checkbox value="Ketogenic">Ketogenic</Checkbox>
-          <Checkbox value="Vegetarian">Vegetarian</Checkbox>
-          <Checkbox value="Vegan">Vegan</Checkbox>
-          <Checkbox value="Pescatarian">Pescatarian</Checkbox>
-          <Checkbox value="Paleo">Paleo</Checkbox>
-          <Checkbox value="Primal">Primal</Checkbox>
-          <Checkbox value="LowFODMAP">Low FODMAP</Checkbox>
-          <Checkbox value="DairyFree">Dairy Free</Checkbox>
+          <Checkbox label="Ketogenic" value="ketogenic">Ketogenic</Checkbox>
+          <Checkbox label="Vegetarian" value="Vegetarian">Vegetarian</Checkbox>
+          <Checkbox label="Vegan" value="vegan">Vegan</Checkbox>
+          <Checkbox label="Whole 30" value="whole 30">Gluten Free</Checkbox>
+          <Checkbox label="Pescaterian"  value="pescetarian">Pescatarian</Checkbox>
+          <Checkbox label="Paleo" value="paleo">Paleo</Checkbox>
+          <Checkbox label="Primal" value="primal">Primal</Checkbox>
+          <Checkbox label="LowFODMAP" value="LowFODMAP">Low FODMAP</Checkbox>
+          <Checkbox label="Ovo Vegetarian"value="ovo vegetarian">Ovo Vegetarian</Checkbox>
         </Stack>
       </CheckboxGroup>
       <Button mt={4} colorScheme="blue" onClick={handleSaveRestrictions}>Save Preferences</Button>
