@@ -9,6 +9,11 @@ import {
   Text,
   useToast,
   Heading,
+  SliderThumb,
+  SliderMark,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
   Flex,
   Image
 } from '@chakra-ui/react';
@@ -16,11 +21,16 @@ import DietaryRestrictionsDisplay from './dietary-display.jsx';
 import {  fetchRecipeById} from '../script/helper';
 import RecipeArticlePage from './recipe-article';
 const MealPlanGenerator = () => {
-  const [calories, setCalories] = useState('');
+  const [calories, setCalories] = useState(1500);
   const [mealPlan, setMealPlan] = useState(null);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [showArticle, setShowArticle] = useState(false);
-  
+  const [sliderValue, setSliderValue] = useState(1500);
+  const labelStyles = {
+    mt: '2',
+    ml: '-2.5',
+    fontSize: 'lg',
+  }
   const toast = useToast();
   const handleSelectRecipe = async (recipeId) => {
     try {
@@ -63,16 +73,44 @@ const MealPlanGenerator = () => {
 
   return (
     <Box p={6} maxW="600px" borderWidth="1px" borderRadius="lg" overflow="hidden" m="auto">
-      <VStack spacing={4}>
+      <VStack spacing={16}>
         <Heading as="h1" size="lg">Daily Meal Plan Generator</Heading>
         <FormControl id="calories">
           <FormLabel>Enter your daily calorie target</FormLabel>
-          <Input
-            placeholder="Calories (e.g., 2000)"
-            type="number"
-            value={calories}
-            onChange={(e) => setCalories(e.target.value)}
-          />
+          
+          <Slider aria-label='slider-ex-6'  defaultValue={1500}
+      min={500}
+      max={6000} onChange={(val) => setCalories(val)}>
+        <SliderMark value={1000} {...labelStyles}>
+          1000
+        </SliderMark>
+        <SliderMark value={2500} {...labelStyles}>
+          2500
+        </SliderMark>
+        <SliderMark value={4500} {...labelStyles}>
+          4500
+        </SliderMark>
+        <SliderMark
+          value={calories}
+          textAlign='center'
+          bg='blue.500'
+          color='white'
+          mt='-10'
+          ml='-5'
+          w='12'
+        >
+          {calories}
+        </SliderMark>
+        
+        
+        <SliderTrack>
+          <SliderFilledTrack />
+        </SliderTrack>
+          
+        <SliderThumb />
+      </Slider>
+          
+          
         </FormControl>
         <FormControl isRequired>
                     <FormLabel>Dietary Restrictions</FormLabel>
