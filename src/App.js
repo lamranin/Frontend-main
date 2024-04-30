@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import SignUpComponent from "./components/signUp-page";
 import CreateArticle from "./components/create-recipe";
-import DashboardComponent from "./components/dashboardd-component";
+import DashboardComponent from "./components/dashboard-component";
 import LoginPage from "./components/sign-in";
 import ArticleList from "./components/blog-component";
 import {ChakraProvider} from "@chakra-ui/react"

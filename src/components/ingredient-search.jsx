@@ -14,8 +14,8 @@ import {
   TagLabel,
   Text
 } from '@chakra-ui/react';
-import { recipeFromIngredients, fetchRecipeById, IngredientSuggestion } from '../script/helper';
-import RecipeArticlePage from './recipe-article';
+import { recipeFromIngredients, fetchRecipeById, IngredientSuggestion } from '../script/helper.js';
+import RecipeArticlePage from './recipe-article.jsx';
 import { AutoComplete } from 'primereact/autocomplete';
 import DietaryRestrictionsDisplay from './dietary-display.jsx';
 const RecipeSearchByIngredients = () => {

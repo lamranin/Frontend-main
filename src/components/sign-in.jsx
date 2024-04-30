@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   Divider
 } from '@chakra-ui/react';
-import RecipeSearchByIngredients from './recip-ing'; // Make sure this component's styling aligns with the landing page.
+import RecipeSearchByIngredients from './ingredient-search'; // Make sure this component's styling aligns with the landing page.
 import { signIn } from '../script/auth';
 import Particles, {initParticlesEngine} from "@tsparticles/react";
 

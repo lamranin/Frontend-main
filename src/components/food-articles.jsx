@@ -9,9 +9,11 @@ import {
   Heading,
   Container,
   useToast,
+  
 } from '@chakra-ui/react';
 import { recipeFromIngredients } from '../script/helper';
-import RecipeSearchByIngredients from './recip-ing';
+import RecipeSearchByIngredients from './ingredient-search';
+import ArticleComponent from './front-articles';
  
 
 const BlogComponent = ({ user }) => {

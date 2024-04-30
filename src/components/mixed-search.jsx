@@ -15,8 +15,8 @@ import { FaSearch, FaAppleAlt, FaInfoCircle } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { SearchRecipeComponentExternal } from './search-recipe-component';// General recipe search
-import IngredientSearch from './sugg-temp'; // Ingredient search
-import RecipeSearchByIngredients from './recip-ing';
+import IngredientSearch from './ingredient-suggestion'; // Ingredient search
+import RecipeSearchByIngredients from './ingredient-search';
 
 import FoodVideoSearch from './video-feed';
 

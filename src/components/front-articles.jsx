@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { createArticle, createRecipe} from '../script/helper';
 import {useLocation, useNavigate} from 'react-router-dom';
+import MiniRecipe from './recipe-article-details';
 
 const ArticleComponent = () => {
   const [newArticleContent, setNewArticleContent] = useState('');
@@ -63,7 +64,7 @@ const handleSaveRecipe = async () => {
 }
 
   const handleSaveArticle = async () => {
-    handleSaveRecipe(location.state.recipeDetails.id);
+    
     setSelectedRecipeId(location.state.recipeDetails.id);
     if (!selectedRecipeId) {
       toast({
@@ -128,6 +129,7 @@ const handleSaveRecipe = async () => {
         value={newArticleContent}
         onChange={e => setNewArticleContent(e.target.value)}
       />
+      <MiniRecipe recipe={location.state.recipeDetails}/>
       <Button colorScheme="teal" onClick={handleSaveArticle}>
         Save Article
       </Button>
