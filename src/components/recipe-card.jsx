@@ -11,7 +11,7 @@ import {
   useToast,
   useDisclosure,
 } from '@chakra-ui/react';
-import { FaComment, FaArrowDown } from 'react-icons/fa';
+import { FaComment, FaArrowDown, FaBroom } from 'react-icons/fa';
 
 import CommentModal from './comment-modal';
 import { saveRecipe } from '../script/helper';
@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import RecipeDetailsModal from './recipe-details-modal';
 import {motion, isValidMotionProp} from 'framer-motion';
 
+import DeleteRecipeButton from './delete-recipe-button';
 
 const RecipeCard = ({ recipe }) => {
     
@@ -122,7 +123,7 @@ const RecipeCard = ({ recipe }) => {
               />
             </Tooltip>
             <CommentModal isOpen={isCommentModalOpen} onClose={onCommentModalClose} recipeId={recipe.id} commentCount={commentCount} setCommentCount={setCommentCount} />
-  
+            
             <Tooltip label="Saved">
               <IconButton
                 icon={<Icon as={FaArrowDown} />}
@@ -131,7 +132,10 @@ const RecipeCard = ({ recipe }) => {
                 size="sm"
                 onClick={handleSave}
               />
+              
+              
             </Tooltip>
+            <DeleteRecipeButton recipeId={recipe.id}/>
           </Stack>
         </Stack>
       </Box>
