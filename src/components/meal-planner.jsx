@@ -44,8 +44,11 @@ const MealPlanGenerator = () => {
   const closeArticle = () => {
     setShowArticle(false);
   };
+  
   const fetchMealPlan = async () => {
-    const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${calories}`;
+    const restrictions = JSON.parse(localStorage.getItem('dietaryRestrictions') || '[]');
+    const restrictionsQuery = restrictions.join(',');
+    const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${calories}&diet=${encodeURIComponent(restrictionsQuery)}`;
     const options = {
       method: 'GET',
       headers: {
